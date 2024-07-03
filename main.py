@@ -25,8 +25,6 @@ def main(page: ft.Page):
     page.theme_mode = cfg['theme_mode']
     page.window.height = cfg['window_height']
     page.window.width = cfg['window_width']
-    page.theme = ft.Theme(color_scheme_seed="cyan")
-    page.bgcolor = "white"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
     # ----- functions -----
@@ -77,17 +75,19 @@ def main(page: ft.Page):
     file_pick_button = ft.OutlinedButton(text='Select file',
                                          on_click=lambda e: file_pick_dialog.pick_files(allow_multiple=False),
                                          style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10),
-                                                              side=ft.BorderSide(width=2))
-                                         )
+                                                              side=ft.BorderSide(width=2),
+                                                              color="black"),
+                                         height=40)
 
     encrypt_button = ft.FilledButton(text='Encrypt', on_click=encrypt_and_output, width=270, height=40,
-                                     style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10)))
+                                     style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10), bgcolor="black"))
 
     key_field = ft.TextField(height=40, width=150, border_width=2, border_radius=10,
                              text_vertical_align=ft.VerticalAlignment.CENTER,
                              content_padding=ft.padding.symmetric(horizontal=10),
                              label="Key word",
-                             password=True, can_reveal_password=True)
+                             password=True, can_reveal_password=True,
+                             focused_border_color="black")
 
     # ----- page view -----
 
@@ -97,12 +97,10 @@ def main(page: ft.Page):
             [
                 ft.Row(
                     [
-                        ft.Image(src="icon.jpg", height=200, width=200)
+                        ft.Image(src="icon.png", height=250, width=250)
                     ],
                     alignment=ft.MainAxisAlignment.CENTER
                 ),
-                ft.Text(),
-                ft.Text(),
                 ft.Row(
                     [
                         file_pick_button,
